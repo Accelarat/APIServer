@@ -11,7 +11,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.time.LocalDate;
 import java.util.Optional;
+import java.util.concurrent.ThreadLocalRandom;
 
 @Service
 @AllArgsConstructor
@@ -44,15 +46,16 @@ public class UserService {
         return repository.findById(id);
     }
 
+    @SneakyThrows
     public ChangeStatusDTO changeStatus(Long id, String status) {
         var user = repository.findById(id).orElseThrow(() -> new RuntimeException("Такого пользователя нет в базе данных"));
-
         var lastStatus = user.getStatus();
 
         user.setStatus(status);
 
         repository.save(user);
 
+        Thread.sleep(getRandomInRange(5000, 10000));
         return ChangeStatusDTO.builder()
                 .id(user.getId())
                 .oldStatus(lastStatus)
@@ -63,5 +66,15 @@ public class UserService {
         return GetStatusDTO.builder()
                 .statuses(repository.findAll())
                 .build();
+    }
+
+    public GetStatusDTO getStatus(LocalDate timestamp) {
+        return GetStatusDTO.builder()
+                .statuses(repository.findAll())
+                .build();
+    }
+
+    private int getRandomInRange(int from, int to) {
+        return ThreadLocalRandom.current().nextInt(from, to + 1);
     }
 }

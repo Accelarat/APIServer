@@ -5,9 +5,12 @@ import com.ihlasov.apiserver.dto.GetStatusDTO;
 import com.ihlasov.apiserver.entity.User;
 import com.ihlasov.apiserver.service.UserService;
 import lombok.AllArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.time.LocalDate;
+import java.util.Objects;
 import java.util.Optional;
 
 @RestController
@@ -22,9 +25,16 @@ public class UserController {
         return service.getUser(id);
     }
 
-    @GetMapping
-    public GetStatusDTO getStatus() {
-        return service.getStatus();
+    @GetMapping("/status")
+    public GetStatusDTO getStatus(
+            @RequestParam(required = false)
+            @DateTimeFormat(pattern = "yyyy-MM-dd")
+            LocalDate timestamp) {
+        if (Objects.nonNull(timestamp)) {
+            return service.getStatus(timestamp);
+        } else {
+            return service.getStatus();
+        }
     }
 
     @PostMapping("/store")
