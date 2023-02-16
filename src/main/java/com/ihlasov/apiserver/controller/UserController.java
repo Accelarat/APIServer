@@ -1,5 +1,7 @@
 package com.ihlasov.apiserver.controller;
 
+import com.ihlasov.apiserver.dto.ChangeStatusDTO;
+import com.ihlasov.apiserver.dto.GetStatusDTO;
 import com.ihlasov.apiserver.entity.User;
 import com.ihlasov.apiserver.service.UserService;
 import lombok.AllArgsConstructor;
@@ -20,6 +22,11 @@ public class UserController {
         return service.getUser(id);
     }
 
+    @GetMapping
+    public GetStatusDTO getStatus() {
+        return service.getStatus();
+    }
+
     @PostMapping("/store")
     public String storeJpg(@RequestParam MultipartFile file) {
         return service.storeJpg(file);
@@ -30,4 +37,10 @@ public class UserController {
             @RequestParam String uri, @RequestParam String name, @RequestParam String email) {
         return service.createUser(uri, name, email);
     }
+
+    @PostMapping("/changeStatus/{id}/{status}")
+    public ChangeStatusDTO changeStatus(@PathVariable Long id, @PathVariable String status) {
+        return service.changeStatus(id, status);
+    }
+
 }
