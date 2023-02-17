@@ -3,6 +3,7 @@ package com.ihlasov.apiserver.entity;
 import lombok.*;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "users")
@@ -20,4 +21,5 @@ public class User {
     String name;
     String email;
     String status;
+    LocalDateTime lastStatusChange;
 }
