@@ -11,7 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -35,6 +35,7 @@ public class UserService {
         var newUser = User.builder()
                 .uri(uri)
                 .name(name)
+                .lastStatusChange(LocalDateTime.now())
                 .email(email).build();
 
         var savedUser = repository.save(newUser);
@@ -48,10 +49,12 @@ public class UserService {
 
     @SneakyThrows
     public ChangeStatusDTO changeStatus(Long id, String status) {
-        var user = repository.findById(id).orElseThrow(() -> new RuntimeException("Такого пользователя нет в базе данных"));
+        var user = repository.findById(id).orElseThrow(() ->
+                new RuntimeException("Такого пользователя нет в базе данных"));
         var lastStatus = user.getStatus();
 
         user.setStatus(status);
+        user.setLastStatusChange(LocalDateTime.now());
 
         repository.save(user);
 
@@ -62,15 +65,9 @@ public class UserService {
                 .newStatus(status).build();
     }
 
-    public GetStatusDTO getStatus() {
+    public GetStatusDTO getStatuses(String status, LocalDateTime time) {
         return GetStatusDTO.builder()
-                .statuses(repository.findAll())
-                .build();
-    }
-
-    public GetStatusDTO getStatus(LocalDate timestamp) {
-        return GetStatusDTO.builder()
-                .statuses(repository.findAll())
+                .statuses(repository.findUsersByStatusAndLastStatusChange(status, time))
                 .build();
     }
 
