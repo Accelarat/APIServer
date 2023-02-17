@@ -66,6 +66,7 @@ public class UserService {
 
     public GetStatusDTO getStatuses(String status, LocalDateTime time) {
         return GetStatusDTO.builder()
+                .requestId(time)
                 .statuses(repository.findUsersByStatusAndLastStatusChange(status, time))
                 .build();
     }
