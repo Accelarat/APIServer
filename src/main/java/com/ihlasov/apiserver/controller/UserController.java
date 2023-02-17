@@ -9,8 +9,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.time.LocalDate;
-import java.util.Objects;
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 @RestController
@@ -25,16 +24,11 @@ public class UserController {
         return service.getUser(id);
     }
 
-    @GetMapping("/status")
-    public GetStatusDTO getStatus(
-            @RequestParam(required = false)
-            @DateTimeFormat(pattern = "yyyy-MM-dd")
-            LocalDate timestamp) {
-        if (Objects.nonNull(timestamp)) {
-            return service.getStatus(timestamp);
-        } else {
-            return service.getStatus();
-        }
+    @GetMapping("/statuses")
+    public GetStatusDTO getStatuses(
+            @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm") LocalDateTime timestamp,
+            @RequestParam String status) {
+        return service.getStatuses(status, timestamp);
     }
 
     @PostMapping("/store")
@@ -43,8 +37,7 @@ public class UserController {
     }
 
     @PostMapping("/create")
-    public Long createUser(
-            @RequestParam String uri, @RequestParam String name, @RequestParam String email) {
+    public Long createUser(@RequestParam String uri, @RequestParam String name, @RequestParam String email) {
         return service.createUser(uri, name, email);
     }
 
@@ -52,5 +45,4 @@ public class UserController {
     public ChangeStatusDTO changeStatus(@PathVariable Long id, @PathVariable String status) {
         return service.changeStatus(id, status);
     }
-
 }
