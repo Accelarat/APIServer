@@ -11,5 +11,5 @@ This is simple RESTful server with some endpoints.
 
 # Extra features
 
-Global exception handling
-Tests with JUnit and Mockito
+1. Global exception handling
+2. Tests with JUnit and Mockito
