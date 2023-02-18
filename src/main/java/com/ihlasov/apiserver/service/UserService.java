@@ -4,13 +4,10 @@ import com.ihlasov.apiserver.dto.ChangeStatusDTO;
 import com.ihlasov.apiserver.dto.GetStatusDTO;
 import com.ihlasov.apiserver.entity.User;
 import com.ihlasov.apiserver.repository.UserRepository;
-import com.ihlasov.apiserver.wrapper.FilesWrapper;
 import lombok.AllArgsConstructor;
 import lombok.SneakyThrows;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
-import java.nio.file.Path;
 import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.concurrent.ThreadLocalRandom;
@@ -20,15 +17,6 @@ import java.util.concurrent.ThreadLocalRandom;
 public class UserService {
 
     private final UserRepository repository;
-    private final FilesWrapper filesWrapper;
-
-    @SneakyThrows
-    public String storeJpg(MultipartFile file) {
-        String root = "C:/jpg/";
-        var fileName = file.getOriginalFilename();
-
-        return filesWrapper.writeBytesIntoPath(Path.of(root + fileName), file.getBytes());
-    }
 
     public Long createUser(String uri, String name, String email) {
         var newUser = User.builder()

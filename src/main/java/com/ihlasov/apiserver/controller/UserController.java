@@ -7,7 +7,6 @@ import com.ihlasov.apiserver.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
@@ -29,11 +28,6 @@ public class UserController {
             @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm") LocalDateTime timestamp,
             @RequestParam String status) {
         return service.getStatuses(status, timestamp);
-    }
-
-    @PostMapping("/store")
-    public String storeJpg(@RequestParam MultipartFile file) {
-        return service.storeJpg(file);
     }
 
     @PostMapping("/create")
