@@ -35,7 +35,7 @@ public class UserService {
     }
 
     @SneakyThrows
-    public ChangeStatusDTO changeStatus(Long id, String status) {
+    public ChangeStatusDTO changeStatus(Long id, Boolean status) {
         var user = repository.findById(id).orElseThrow(() ->
                 new RuntimeException("Такого пользователя нет в базе данных"));
         var lastStatus = user.getStatus();
@@ -52,7 +52,7 @@ public class UserService {
                 .newStatus(status).build();
     }
 
-    public GetStatusDTO getStatuses(String status, LocalDateTime time) {
+    public GetStatusDTO getStatuses(Boolean status, LocalDateTime time) {
         return GetStatusDTO.builder()
                 .requestId(time)
                 .statuses(repository.findUsersByStatusAndLastStatusChange(status, time))

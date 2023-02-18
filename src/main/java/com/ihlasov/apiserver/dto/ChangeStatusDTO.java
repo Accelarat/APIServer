@@ -11,6 +11,6 @@ import lombok.Setter;
 @Builder
 public class ChangeStatusDTO {
     private Long id;
-    private String newStatus;
-    private String oldStatus;
+    private Boolean newStatus;
+    private Boolean oldStatus;
 }

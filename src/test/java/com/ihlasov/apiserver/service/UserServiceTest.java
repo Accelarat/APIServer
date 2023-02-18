@@ -29,8 +29,8 @@ class UserServiceTest {
     String uri = "C:/jpg/fileName";
     String name = "Peter";
     String email = "email@ooo.com";
-    String oldStatus = "Offline";
-    String newStatus = "Online";
+    Boolean oldStatus = false;
+    Boolean newStatus = true;
     LocalDateTime lastStatusChange = LocalDateTime.of(2023, 2, 18, 0, 6);
     User user;
 

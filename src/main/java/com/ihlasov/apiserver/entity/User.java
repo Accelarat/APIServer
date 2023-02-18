@@ -20,6 +20,6 @@ public class User {
     String uri;
     String name;
     String email;
-    String status;
+    Boolean status;
     LocalDateTime lastStatusChange;
 }

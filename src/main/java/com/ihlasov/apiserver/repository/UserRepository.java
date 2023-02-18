@@ -12,5 +12,5 @@ import java.util.List;
 public interface UserRepository extends JpaRepository<User, Long> {
     @Query(value = "SELECT * from users where status = :status and last_status_change > :time",
     nativeQuery = true)
-    List<User> findUsersByStatusAndLastStatusChange(String status, LocalDateTime time);
+    List<User> findUsersByStatusAndLastStatusChange(Boolean status, LocalDateTime time);
 }

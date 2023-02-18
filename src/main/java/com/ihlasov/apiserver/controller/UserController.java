@@ -26,7 +26,7 @@ public class UserController {
     @GetMapping
     public GetStatusDTO getAll(
             @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm") LocalDateTime timestamp,
-            @RequestParam String status) {
+            @RequestParam Boolean status) {
         return service.getStatuses(status, timestamp);
     }
 
@@ -39,7 +39,7 @@ public class UserController {
 
     @PutMapping("/{id}/{status}")
     public ChangeStatusDTO changeStatus(@PathVariable Long id,
-                                        @PathVariable String status) {
+                                        @PathVariable Boolean status) {
         return service.changeStatus(id, status);
     }
 }
