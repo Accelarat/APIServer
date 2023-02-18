@@ -12,7 +12,7 @@ public class GlobalExceptionHandler {
 
     private static final String DEFAULT_MESSAGE = "Что-то пошло не так :(";
 
-    @ExceptionHandler(Throwable.class)
+    @ExceptionHandler(RuntimeException.class)
     public ResponseEntity<String> globalException() {
         return ResponseEntity
                 .status(HttpStatus.INTERNAL_SERVER_ERROR)
