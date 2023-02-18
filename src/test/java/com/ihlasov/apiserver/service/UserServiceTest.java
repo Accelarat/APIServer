@@ -58,7 +58,6 @@ class UserServiceTest {
     @Test
     void getUser() {
         //given
-        long userId = 1L;
         var user = new User();
 
         //when
