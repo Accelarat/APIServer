@@ -23,20 +23,23 @@ public class UserController {
         return service.getUser(id);
     }
 
-    @GetMapping("/statuses")
-    public GetStatusDTO getStatuses(
+    @GetMapping
+    public GetStatusDTO getAll(
             @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm") LocalDateTime timestamp,
             @RequestParam String status) {
         return service.getStatuses(status, timestamp);
     }
 
-    @PostMapping("/create")
-    public Long createUser(@RequestParam String uri, @RequestParam String name, @RequestParam String email) {
+    @PostMapping
+    public Long create(@RequestParam String uri,
+                       @RequestParam String name,
+                       @RequestParam String email) {
         return service.createUser(uri, name, email);
     }
 
-    @PostMapping("/changeStatus/{id}/{status}")
-    public ChangeStatusDTO changeStatus(@PathVariable Long id, @PathVariable String status) {
+    @PutMapping("/{id}/{status}")
+    public ChangeStatusDTO changeStatus(@PathVariable Long id,
+                                        @PathVariable String status) {
         return service.changeStatus(id, status);
     }
 }
