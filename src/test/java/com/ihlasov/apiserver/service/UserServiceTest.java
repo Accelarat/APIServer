@@ -83,7 +83,7 @@ class UserServiceTest {
     @Test
     void getStatuses() {
         //when
-        when(repository.findUsersByStatusAndLastStatusChange(oldStatus, lastStatusChange)).thenReturn(List.of(user));
+        when(repository.findByStatusAndLastStatusChangeAfter(oldStatus, lastStatusChange)).thenReturn(List.of(user));
         var serviceResult = service.getStatuses(oldStatus, lastStatusChange);
 
         //then
