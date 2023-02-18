@@ -8,3 +8,8 @@ This is simple RESTful server with some endpoints.
 2. Spring boot, web, data JPA
 3. PostgreSQL db
 4. Gradle 
+
+# Extra features
+
+Global exception handling
+Tests with JUnit and Mockito
