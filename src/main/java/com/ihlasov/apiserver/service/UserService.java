@@ -22,6 +22,7 @@ public class UserService {
         var newUser = User.builder()
                 .uri(uri)
                 .name(name)
+                .status(true)
                 .lastStatusChange(LocalDateTime.now())
                 .email(email).build();
 
