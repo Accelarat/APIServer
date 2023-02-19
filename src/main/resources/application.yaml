@@ -1,10 +1,8 @@
-server:
-  port: 7878
-  tomcat:
-    relaxed-query-chars: '|,{,},[,],\'
-
 spring:
   datasource:
-    username: postgres #${DB_USERNAME}
-    password: jooker131 #${DB_PASSWORD}
-    url: jdbc:postgresql://localhost:5432/APIServer #${DB_JDBC_URL}
+    username: ${SPRING_DATASOURCE_USERNAME}
+    password: ${SPRING_DATASOURCE_PASSWORD}
+    url: ${SPRING_DATASOURCE_URL}
+
+files:
+  root: ${FILES_ROOT}

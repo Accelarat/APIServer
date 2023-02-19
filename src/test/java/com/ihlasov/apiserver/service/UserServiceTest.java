@@ -5,6 +5,7 @@ import com.ihlasov.apiserver.repository.UserRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
@@ -25,14 +26,16 @@ class UserServiceTest {
     @MockBean
     private UserRepository repository;
 
-    Long userId = 1L;
-    String uri = "C:/jpg/fileName";
-    String name = "Peter";
-    String email = "email@ooo.com";
-    Boolean oldStatus = false;
-    Boolean newStatus = true;
-    LocalDateTime lastStatusChange = LocalDateTime.of(2023, 2, 18, 0, 6);
-    User user;
+    @Value("${files.root}")
+    private String filesRoot;
+    private final Long userId = 1L;
+    private final String uri = filesRoot + "fileName";
+    private final String name = "Peter";
+    private final String email = "email@ooo.com";
+    private final Boolean oldStatus = false;
+    private final Boolean newStatus = true;
+    private final LocalDateTime lastStatusChange = LocalDateTime.of(2023, 2, 18, 0, 6);
+    private User user;
 
     @Test
     @BeforeEach
